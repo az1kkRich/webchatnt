@@ -1,0 +1,13 @@
+@keyframes spin-twice {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(720deg); /* 2 marta 360 = 720 */
+    }
+  }
+  
+  .spin-twice {
+    animation: spin-twice 1s ease-in-out;
+  }
+  

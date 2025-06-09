@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import Navbar from './components/nav-sidebar/Navbar'
+import SideBar from './components/nav-sidebar/SideBar'
+import { Toaster } from 'react-hot-toast'
+import { Outlet } from 'react-router-dom'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      {/* <Login /> */}
+      {/* <Register />   */}
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
+      <Navbar />
+      <div className=' left-0 md:relative flex flex-row md:w-full'>
+        <div className="w-1/6">
+          <SideBar />
+        </div>
+          <main className='w-5/6'>
+            <Outlet />
+          </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+    </div>
   )
 }
 
