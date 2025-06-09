@@ -31,6 +31,7 @@ export const searchUsers = (query = "") => api.get(`/users/search?q=${encodeURIC
 
 // Groups
 export const getMyGroups = () => api.get("/groups");
+export const getGroupDetail = (groupId) => api.get(`/groupid/${groupId}`);
 export const CreateGroup = (userData) => api.post("/groups", userData);
 export const DeleteGroup = (groupId) => api.delete(`/groups/${groupId}`);
 export const AddMember = (groupId) => api.post(`/groups/${groupId}/members`);
