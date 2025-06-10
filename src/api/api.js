@@ -27,15 +27,21 @@ export const getMe = () => api.get("/auth");
 // User
 export const register = (userData) => api.post("/users", userData);
 export const handelDelete = () => api.delete('/users');
-export const searchUsers = (query = "") => api.get(`/users/search?q=${encodeURIComponent(query)}`);
 
 // Groups
 export const getMyGroups = () => api.get("/groups");
-export const getGroupDetail = (groupId) => api.get(`/groupid/${groupId}`);
 export const CreateGroup = (userData) => api.post("/groups", userData);
 export const DeleteGroup = (groupId) => api.delete(`/groups/${groupId}`);
-export const AddMember = (groupId) => api.post(`/groups/${groupId}/members`);
+export const addMember = ({ groupId, memberId }) =>  api.post(`/groups/${groupId}/members`, { memberId });
 export const RemoveMember = (groupId, memberId) => api.delete(`/groups/${groupId}/members/${memberId}`);
 export const JoinToGroup = (groupId, userData) => api.post(`/groups/${groupId}/join`, userData);
-export const LeaveFromGroup = (groupId, userData) => api.post(`/groups/${groupId}/leave`, userData);
-export const SearchGroup = (query = "") => api.get(`/groups/search?q=${encodeURIComponent(query)}`);
+export const LeaveFromGroup = ({groupId, userData}) => api.post(`/groups/${groupId}/leave`, {groupId, ...userData});
+
+// Search
+export const SearchUsers = (searchText) => api.get(`/users/search?q=${searchText}`);
+
+// Items
+export const addItem = ({ groupId, itemData }) => api.post(`/items`, { groupId, ...itemData });
+export const removeItemFromGroup = (itemId) => api.delete(`/items/${itemId}`);
+export const markItemAsBought = (itemId) => api.post(`/items/${itemId}/mark-as-bought`);
+export const removeItemAsBought = (itemId) => api.delete(`/items/${itemId}/mark-as-bought`);

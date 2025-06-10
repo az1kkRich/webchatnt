@@ -34,7 +34,7 @@ const Profile = () => {
 
   return (
     <div className='w-full flex justify-center py-4'>
-      <div className="bg-cyan-700 border-b-blue-700 rounded-2xl w-[94%] flex justify-between p-5 min-h-[200px]">
+      <div className="bg-gray-900 border-b-blue-700 rounded-2xl w-[94%] flex justify-between p-5 min-h-[200px]">
         {loading ? (
           <div className="w-full flex justify-center items-center">
             <Spin size="large" tip="Loading profile..." />

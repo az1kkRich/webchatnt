@@ -6,7 +6,7 @@ import { FcAddDatabase } from 'react-icons/fc';
 import FloatingModal from '../main/modal';
 import { GrGroup } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
-import { getMyGroups } from '../../api/api';
+import { CreateGroup, getMyGroups } from '../../api/api';
 import toast from 'react-hot-toast';
 
 const SideBar = () => {
@@ -14,10 +14,24 @@ const SideBar = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  
 
-  const handleAddGroup = (data) => {
-    console.log("Group added:", data);
-    // Bu yerda API chaqirishingiz yoki statega saqlashingiz mumkin
+  const handleAddGroup = async (data) => {
+    console.log("Group data to be added:", data);
+    if (data) {
+      try {
+        await CreateGroup(data);
+        toast.success("Group added successfully!");
+        fetchGroups();
+  
+      } catch (error) {
+        console.error("Error adding group:", error);
+        toast.error("Failed to add group.");
+        
+      }
+
+    }
+    
   };
 
 
@@ -27,9 +41,11 @@ const SideBar = () => {
     try {
       const response = await getMyGroups();
       setGroups(response.data);
+      console.log("Fetched groups:", response.data);
+      
     } catch (error) {
       console.error("Failed to fetch groups:", error);
-      toast.error("Failed to load groups.");
+      // toast.error("Failed to load groups.");
     } finally {
       setLoading(false);
     }
@@ -41,7 +57,7 @@ const SideBar = () => {
 
 
   return (
-    <div className='w-full bg-cyan-100 h-[88vh] pt-4 flex flex-col items-center gap-2'>
+    <div className='w-full bg-black h-[88vh] pt-4 flex flex-col items-center gap-2'>
       <Link to="/" className='w-[90%]'>
         <Button type="dashed" className='w-full' icon={<CgProfile className='text-blue-600!' size={20} />}>Profile</Button>
 
@@ -62,8 +78,12 @@ const SideBar = () => {
         </Link>
       )}
 
-      <Button type="dashed" className='w-[90%]' icon={<CgAdd className='text-blue-600!' size={20} />}
-        onClick={() => setIsModalOpen(true)}>Create Group </Button>
+      <Button type="dashed" className='w-[90%]' 
+        icon={<CgAdd className='text-blue-600!' size={20} />}        
+        onClick={() => setIsModalOpen(true)}>
+
+          Create Group 
+      </Button>
       <FloatingModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

@@ -59,12 +59,12 @@ const Navbar = () => {
     };
 
     return (
-        <div className='w-full flex justify-between items-center py-2 px-5 bg-cyan-100 shadow-md'>
+        <div className='w-full flex justify-between items-center py-2 px-5 bg-black shadow-md'>
             <div className="w-1/8">
                 <img src={Mainlogo} className='w-[60px]' alt="Main Logo" />
             </div>
             <div className='w-5/8'>
-                <Search placeholder="input search text" onSearch={onSearch} enterButton size='large' />
+                <Search placeholder="input search text" onSearch={onSearch} enterButton  size='large' />
             </div>
 
             <div className='w-2/8 flex justify-end items-center gap-3'>

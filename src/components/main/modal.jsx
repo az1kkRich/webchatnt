@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { Modal, Input, Button } from "antd";
 
 const FloatingModal = ({ isOpen, onClose, onAdd }) => {
-  const [groupName, setGroupName] = useState("");
-  const [groupPassword, setGroupPassword] = useState("");
+  const [name, setGroupName] = useState("");
+  const [password, setGroupPassword] = useState("");
 
   const handleAdd = () => {
-    onAdd({ groupName, groupPassword });
+    
+    onAdd({ name, password });
     setGroupName("");
     setGroupPassword("");
     onClose();
   };
+  
 
   return (
     <Modal
@@ -34,7 +36,7 @@ const FloatingModal = ({ isOpen, onClose, onAdd }) => {
       <div className="mb-2">
         <label className="block mb-3">Group Name</label>
         <Input
-          value={groupName}
+          value={name}
           onChange={(e) => setGroupName(e.target.value)}
           placeholder="Enter group name"
           required
@@ -45,7 +47,7 @@ const FloatingModal = ({ isOpen, onClose, onAdd }) => {
           Group Password
         </label>
         <Input.Password
-          value={groupPassword}
+          value={password}
           onChange={(e) => setGroupPassword(e.target.value)}
           placeholder="Enter group password"
           required
